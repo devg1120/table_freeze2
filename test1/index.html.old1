@@ -42,7 +42,7 @@ Retrieved 2026-02-07, License - CC BY-SA 4.0
       .table-wrapper {
         overflow-y: auto;
         overflow-x: auto;
-        max-height: 500px;            /* GUSA */
+        max-height: 400px;
         /* Optional limit */
 
         position: relative;
@@ -69,14 +69,10 @@ Retrieved 2026-02-07, License - CC BY-SA 4.0
         border-bottom: 2px solid #0f2c48;
         z-index: 3;
         /* Ensures headers stay on top */
-      } 
-
-      table thead:nth-child(2) th {       /* ROW #2 FIX */
-        top: 42px;
       }
 
-      table thead:nth-child(3) th {       /* ROW #2 FIX */
-        top: 84px;
+      table thead:nth-child(2) th {
+        top: 42px;
       }
 
       table th,

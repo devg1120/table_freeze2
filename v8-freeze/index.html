@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>table col & row freeze</title>
+  </head>
+
+  <body>
+    <script type="module">
+
+      import { Table } from "./src/table_esm.js";
+
+      let table5;
+
+      window.onload = function () {
+
+        function ost(obj) {
+          return JSON.stringify(obj, null, "");
+        }
+        let colm = [];
+        for (let n = 0; n < 26; n++) {
+          var char = String.fromCharCode(97 + n).toUpperCase();
+          colm.push(char);
+        }
+
+        let data = [];
+        let index = {};
+        for (let i = 0; i < colm.length; i++) {
+          index[colm[i]] = "int";
+        }
+        let title = {};
+        for (let i = 0; i < colm.length; i++) {
+          title[colm[i]] = colm[i];
+        }
+        let head = {
+          index: index,
+          title: title,
+          freeze: { c: 0, r: 0 },
+        };
+        data.push(head);
+        let ymax = 25;
+        for (let y = 0; y < ymax; y++) {
+          let fields = {};
+          for (let x = 0; x < colm.length; x++) {
+            fields[colm[x]] = String(y + 1) + "-" + String(x + 1);
+          }
+          let fields_data = { fields: fields };
+          data.push(fields_data);
+        }
+
+        data[0].freeze = { c: 3, r: 2 };
+        let json_data5 = ost(data);
+
+        table5 = new Table("container5", "300%");
+        table5.init(json_data5);
+        table5.table_freeze();
+
+      };
+
+      document.querySelector("#unfreeze").onclick = () => {
+        table5.unFreeze();
+      };
+
+      document.querySelector("#onfreeze").onclick = () => {
+        table5.onFreeze();
+      };
+
+    </script>
+
+    <button id="unfreeze">OFF</button>
+    <button id="onfreeze">ON</button>
+
+    <br />
+    <br />
+    <div class="wrapper">
+      <div class="container-scrollable" id="container5"></div>
+    </div>
+
+  </body>
+</html>
